@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ClassicDice verify</title>
+  <title>Ring of fortune verify</title>
   <link rel="stylesheet" href="./lib/main.css">
   <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
   <script src="./lib/GoogleAnalytics.js"></script>
@@ -15,7 +15,7 @@
 <body>
   
 <div id="app" class="main">
-  <h1 class="text-center pb-5">ClassicDice verify</h1> 
+  <h1 class="text-center pb-5">Ring of fortune verify</h1> 
   <hr>
   <form class="py-5">
     <h2 class="text-center">Input</h2>
@@ -63,13 +63,19 @@
     </div>
     <h5>Bytes to Number</h5>
     <div class="form-group">
-      ({{results.hex[0] + ', ' + results.hex[1] + ', ' + results.hex[2] + ', ' + results.hex[3]}}) -> [0, ... 4] = <span class="text-success">{{Math.floor(numResult * 100.01 * 100) / 100}}</span>
+      ({{results.hex[0] + ', ' + results.hex[1] + ', ' + results.hex[2] + ', ' + results.hex[3]}}) -> [0, ... 4] = <span class="text-success">{{Math.floor(numResult * 1000)}}</span>
       <div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> {{Number(results.hex[0] / 256).toFixed(9)}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>({{results.hex[0]}} / (256 ^ 1))</span></div>
       <div><span>+&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{Number(results.hex[1] / (256 * 256)).toFixed(9)}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>({{results.hex[1]}} / (256 ^ 2))</span></div>
       <div><span>+&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{Number(results.hex[2] / (256 * 256 * 256)).toFixed(9)}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>({{results.hex[2]}} / (256 ^ 3))</span></div>
       <div><span>+&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{Number(results.hex[3] / (256 * 256 * 256 * 256)).toFixed(9)}}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>({{results.hex[3]}} / (256 ^ 4))</span></div>
-      <div><span>=&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{numResult}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>(* 10001 / 100)</div>
-      <div><span>=&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-success">{{Number(numResult * 100.01).toFixed(9)}}</span></div>
+      <div><span>=&nbsp;&nbsp;&nbsp;&nbsp;</span><span>{{numResult}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>(* 1000)</div>
+      <div><span>=&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-success">{{Number(numResult * 1000).toFixed(9)}}</span></div>
+    </div>
+    <div>
+      <div :class="{'text-success': numResult * 1000 <= 495}">0~495 = 2x</div>
+      <div :class="{'text-success': numResult * 1000 >= 496 && numResult * 1000 <= 825}">496~825 = 3x</div>
+      <div :class="{'text-success': numResult * 1000 >= 826 && numResult * 1000 <= 990}">826~990 = 6x</div>
+      <div :class="{'text-success': numResult * 1000 >= 991}">991~1000 = 99x</div>
     </div>
   </form>
 </div>
